@@ -13,29 +13,29 @@
        DESIGN TOKENS — Fonte da verdade (preservado do original)
        ============================================================ */
     :root {
-      /* Entidades */
-      --prefeitura-base: #2563EB;
-      --prefeitura-dark: #1D4ED8;
+      /* Entidades (Enterprise Muted) */
+      --prefeitura-base: #1E3A8A; /* Slate/Navy */
+      --prefeitura-dark: #172554;
       --prefeitura-light: #EFF6FF;
       --prefeitura-muted: #BFDBFE;
 
-      --saude-base: #0D9488;
-      --saude-dark: #0F766E;
-      --saude-light: #F0FDFA;
-      --saude-muted: #99F6E4;
+      --saude-base: #064E3B; /* Deep Emerald */
+      --saude-dark: #022C22;
+      --saude-light: #ECFDF5;
+      --saude-muted: #A7F3D0;
 
-      --educacao-base: #D97706;
-      --educacao-dark: #B45309;
+      --educacao-base: #78350F; /* Bronze/Rust */
+      --educacao-dark: #451A03;
       --educacao-light: #FFFBEB;
       --educacao-muted: #FDE68A;
 
-      --assistencia-base: #7C3AED;
-      --assistencia-dark: #6D28D9;
-      --assistencia-light: #F5F3FF;
-      --assistencia-muted: #DDD6FE;
+      --assistencia-base: #312E81; /* Deep Indigo */
+      --assistencia-dark: #1E1B4B;
+      --assistencia-light: #EEF2FF;
+      --assistencia-muted: #C7D2FE;
 
-      --samae-base: #0891B2;
-      --samae-dark: #0E7490;
+      --samae-base: #164E63; /* Steel/Slate Teal */
+      --samae-dark: #083344;
       --samae-light: #ECFEFF;
       --samae-muted: #A5F3FC;
 
@@ -522,7 +522,7 @@
     .glass-card {
       background: var(--ds-glass);
       border: 1px solid var(--ds-glass-border);
-      border-radius: 16px;
+      border-radius: var(--borda-raio-lg);
       padding: 32px;
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
@@ -617,7 +617,7 @@
     }
 
     .device-frame {
-      border-radius: 16px;
+      border-radius: var(--borda-raio-lg);
       overflow: hidden;
       border: 1px solid var(--ds-border);
       box-shadow:
@@ -632,7 +632,7 @@
       content: '';
       position: absolute;
       inset: -1px;
-      border-radius: 17px;
+      border-radius: calc(var(--borda-raio-lg) + 1px);
       padding: 1px;
       background: linear-gradient(
         180deg,
@@ -1387,23 +1387,23 @@
     <!-- Entity Switcher Pills -->
     <div class="entity-switcher" id="entity-switcher">
       <button class="entity-pill ativa" onclick="trocarEntidade(this,'prefeitura')">
-        <span class="entity-pill-dot" style="background:#2563EB;"></span>
+        <span class="entity-pill-dot" style="background:#1E3A8A;"></span>
         Prefeitura
       </button>
       <button class="entity-pill" onclick="trocarEntidade(this,'saude')">
-        <span class="entity-pill-dot" style="background:#0D9488;"></span>
+        <span class="entity-pill-dot" style="background:#064E3B;"></span>
         Saúde
       </button>
       <button class="entity-pill" onclick="trocarEntidade(this,'educacao')">
-        <span class="entity-pill-dot" style="background:#D97706;"></span>
+        <span class="entity-pill-dot" style="background:#78350F;"></span>
         Educação
       </button>
       <button class="entity-pill" onclick="trocarEntidade(this,'assistencia')">
-        <span class="entity-pill-dot" style="background:#7C3AED;"></span>
+        <span class="entity-pill-dot" style="background:#312E81;"></span>
         Assist. Social
       </button>
       <button class="entity-pill" onclick="trocarEntidade(this,'samae')">
-        <span class="entity-pill-dot" style="background:#0891B2;"></span>
+        <span class="entity-pill-dot" style="background:#164E63;"></span>
         SAMAE
       </button>
     </div>
@@ -1411,11 +1411,10 @@
     <!-- Device Frame -->
     <div class="device-frame" id="device-frame">
       <div class="device-titlebar">
-        <div class="device-dot" style="background:#FF5F57;"></div>
-        <div class="device-dot" style="background:#FEBC2E;"></div>
-        <div class="device-dot" style="background:#28C840;"></div>
-        <span class="device-titlebar-text">plataforma-polis.app — <span id="demo-entidade-nome">Prefeitura</span></span>
-        <div style="width:50px;"></div>
+        <!-- Minimalist line indicator instead of Mac dots -->
+        <div style="width:16px;height:2px;background:var(--ds-text-dim);border-radius:2px;"></div>
+        <span class="device-titlebar-text" style="text-align:left;margin-left:12px;font-family:var(--fonte-mono);">/sys/polis/<span id="demo-entidade-nome">prefeitura</span>/app</span>
+        <div style="width:24px;"></div>
       </div>
 
       <div class="device-content demo-light-zone">
@@ -1423,23 +1422,23 @@
         <div class="polis-sidebar" style="width:252px;color:var(--sidebar-texto);">
           <div class="polis-entidade-switcher" style="padding-top:var(--espacamento-base);">
             <button class="polis-entidade-btn ativa" data-entidade="prefeitura" onclick="trocarEntidade(this,'prefeitura')">
-              <span class="polis-entidade-dot" style="background:#2563EB;"></span>
+              <span class="polis-entidade-dot" style="background:#1E3A8A;"></span>
               <span class="polis-entidade-nome">Prefeitura</span>
             </button>
             <button class="polis-entidade-btn" data-entidade="saude" onclick="trocarEntidade(this,'saude')">
-              <span class="polis-entidade-dot" style="background:#0D9488;"></span>
+              <span class="polis-entidade-dot" style="background:#064E3B;"></span>
               <span class="polis-entidade-nome">Saúde</span>
             </button>
             <button class="polis-entidade-btn" data-entidade="educacao" onclick="trocarEntidade(this,'educacao')">
-              <span class="polis-entidade-dot" style="background:#D97706;"></span>
+              <span class="polis-entidade-dot" style="background:#78350F;"></span>
               <span class="polis-entidade-nome">Educação</span>
             </button>
             <button class="polis-entidade-btn" data-entidade="assistencia" onclick="trocarEntidade(this,'assistencia')">
-              <span class="polis-entidade-dot" style="background:#7C3AED;"></span>
+              <span class="polis-entidade-dot" style="background:#312E81;"></span>
               <span class="polis-entidade-nome">Assist. Social</span>
             </button>
             <button class="polis-entidade-btn" data-entidade="samae" onclick="trocarEntidade(this,'samae')">
-              <span class="polis-entidade-dot" style="background:#0891B2;"></span>
+              <span class="polis-entidade-dot" style="background:#164E63;"></span>
               <span class="polis-entidade-nome">SAMAE</span>
             </button>
           </div>
@@ -1447,7 +1446,7 @@
           <nav class="polis-sidebar-nav">
             <div class="polis-sidebar-grupo-label">Módulos</div>
             <div class="polis-sidebar-item aberto ativo" onclick="toggleAccordion(this)">
-              <span class="polis-sidebar-icone">👤</span>
+              <span class="polis-sidebar-icone"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
               <span>Recursos Humanos</span>
               <span class="polis-sidebar-toggle">▾</span>
             </div>
@@ -1458,7 +1457,7 @@
               <div class="polis-sidebar-subitem">Férias</div>
             </div>
             <div class="polis-sidebar-item" onclick="toggleAccordion(this)">
-              <span class="polis-sidebar-icone">💼</span>
+              <span class="polis-sidebar-icone"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>
               <span>Compras</span>
               <span class="polis-sidebar-toggle">▾</span>
             </div>
@@ -1468,25 +1467,27 @@
               <div class="polis-sidebar-subitem">Almoxarifado</div>
             </div>
             <div class="polis-sidebar-item" onclick="toggleAccordion(this)">
-              <span class="polis-sidebar-icone">💰</span>
+              <span class="polis-sidebar-icone"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
               <span>Financeiro</span>
               <span class="polis-sidebar-toggle">▾</span>
             </div>
             <div class="accordion-body" style="display:none;">
               <div class="polis-sidebar-subitem">Contabilidade</div>
               <div class="polis-sidebar-subitem">Tesouraria</div>
-              <div class="polis-sidebar-subitem">Planejamento</div>
-            </div>
-            <div class="polis-sidebar-item">
-              <span class="polis-sidebar-icone">📄</span>
+              <div class="polis-sidebar-item">
+              <span class="polis-sidebar-icone"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></span>
               <span>Protocolo</span>
             </div>
             <div class="polis-sidebar-item">
-              <span class="polis-sidebar-icone">📁</span>
+              <span class="polis-sidebar-icone"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span>
               <span>Documentos</span>
             </div>
             <div class="polis-sidebar-item" onclick="toggleAccordion(this)">
-              <span class="polis-sidebar-icone">🏗️</span>
+              <span class="polis-sidebar-icone"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
+              <span>Configurações</span>
+            </div>
+            <div class="polis-sidebar-item" onclick="toggleAccordion(this)">
+              <span class="polis-sidebar-icone"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20M12 2l4 4M12 2l-4 4M12 22l4-4M12 22l-4-4"/></svg></span>
               <span>Obras</span>
               <span class="polis-sidebar-toggle">▾</span>
             </div>

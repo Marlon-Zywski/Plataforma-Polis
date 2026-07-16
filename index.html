@@ -83,12 +83,12 @@
       --cor-texto-fraco: #94A3B8;
       --cor-texto-invertido: #FFFFFF;
 
-      /* Sidebar */
-      --sidebar-fundo: #0F1523;
-      --sidebar-fundo-hover: rgba(255, 255, 255, 0.06);
-      --sidebar-fundo-ativo: rgba(255, 255, 255, 0.10);
-      --sidebar-texto: #94A3B8;
-      --sidebar-texto-ativo: #FFFFFF;
+      /* Sidebar (Light/Enterprise Mode) */
+      --sidebar-fundo: #F8FAFC;
+      --sidebar-fundo-hover: rgba(0, 0, 0, 0.04);
+      --sidebar-fundo-ativo: rgba(0, 0, 0, 0.08);
+      --sidebar-texto: #64748B;
+      --sidebar-texto-ativo: #0F172A;
       --sidebar-largura: 252px;
 
       /* Tipografia */
@@ -691,6 +691,7 @@
       flex-direction: column;
       flex-shrink: 0;
       overflow: hidden;
+      border-right: 1px solid rgba(0, 0, 0, 0.06);
     }
 
     .polis-entidade-switcher {
@@ -698,7 +699,7 @@
       display: flex;
       flex-direction: column;
       gap: 2px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
       padding-bottom: var(--espacamento-sm);
     }
 
@@ -738,7 +739,7 @@
 
     .polis-sidebar-header {
       padding: var(--espacamento-base);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
       display: flex;
       align-items: center;
       gap: var(--espacamento-sm);
@@ -767,11 +768,11 @@
       overflow-y: auto;
       padding: var(--espacamento-xs) 0;
       scrollbar-width: thin;
-      scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+      scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
     }
 
     .polis-sidebar-nav::-webkit-scrollbar { width: 4px; }
-    .polis-sidebar-nav::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 2px; }
+    .polis-sidebar-nav::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.1); border-radius: 2px; }
 
     .polis-sidebar-grupo-label {
       font-size: 10px;
@@ -843,7 +844,7 @@
     .polis-sidebar-toggle { margin-left: auto; font-size: 10px; opacity: 0.5; transition: transform var(--transicao-padrao); }
     .polis-sidebar-item.aberto .polis-sidebar-toggle { transform: rotate(180deg); }
 
-    .polis-sidebar-rodape { padding: var(--espacamento-sm); border-top: 1px solid rgba(255, 255, 255, 0.06); }
+    .polis-sidebar-rodape { padding: var(--espacamento-sm); border-top: 1px solid rgba(0, 0, 0, 0.06); }
 
     .polis-sidebar-usuario {
       display: flex;

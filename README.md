@@ -88,7 +88,7 @@ O Design System é a **fonte da verdade visual** de toda a plataforma. Cada enti
 
 ## 🔐 Princípios
 
-- **🏠 Independência total** — Sem dependência de fornecedores externos
+- **🏠 Independência total** — Sem dependência de sistemas externos
 - **🧩 Full-Modular** — Arquitetura baseada em módulos independentes. Esqueça sistemas "engessados"; ative e componha apenas o que o município realmente precisa.
 - **🔒 Segurança by design** — Dados sensíveis ficam na infraestrutura do município
 - **🎨 Consistência visual** — Design System como fonte da verdade

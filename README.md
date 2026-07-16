@@ -5,8 +5,8 @@
 ### O ecossistema definitivo para gestão municipal
 
 [![Design System](https://img.shields.io/badge/Design_System-v2.0-2563EB?style=for-the-badge&labelColor=0F172A)](https://marlon-zywski.github.io/Plataforma-Polis/)
-[![Status](https://img.shields.io/badge/Status-Em_Desenvolvimento-16A34A?style=for-the-badge&labelColor=0F172A)]()
-[![Stack](https://img.shields.io/badge/Stack-Django_+_PostgreSQL-0D9488?style=for-the-badge&labelColor=0F172A)]()
+![Status](https://img.shields.io/badge/Status-Em_Desenvolvimento-16A34A?style=for-the-badge&labelColor=0F172A)
+![Stack](https://img.shields.io/badge/Stack-Django_+_PostgreSQL-0D9488?style=for-the-badge&labelColor=0F172A)
 
 ---
 

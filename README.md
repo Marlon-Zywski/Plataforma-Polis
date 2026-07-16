@@ -13,7 +13,11 @@
 **Plataforma Pólis** é um sistema de gestão municipal 100% independente que substitui sistemas legados.  
 Unifica **Saúde**, **Educação**, **Tributos** e **RH** em uma única base de dados com arquitetura moderna e segura.
 
-[**🔗 Ver Design System ao Vivo →**](https://marlon-zywski.github.io/Plataforma-Polis/)
+<br>
+
+[![Acessar Design System ao Vivo](https://img.shields.io/badge/%F0%9F%94%97_ACESSAR_DESIGN_SYSTEM_AO_VIVO_%E2%86%92-1E3A8A?style=for-the-badge)](https://marlon-zywski.github.io/Plataforma-Polis/)
+
+<br>
 
 </div>
 
@@ -34,7 +38,7 @@ Diferente de "sistemas prontos" comerciais que obrigam a prefeitura a se adaptar
 │                    PLATAFORMA PÓLIS                      │
 ├─────────────┬──────────────┬─────────────┬──────────────┤
 │  Prefeitura │    Saúde     │  Educação   │    SAMAE     │
-│   #2563EB   │   #0D9488    │   #D97706   │   #0891B2   │
+│   #1E3A8A   │   #064E3B    │   #78350F   │   #164E63   │
 ├─────────────┴──────────────┴─────────────┴──────────────┤
 │               Módulos Compartilhados                     │
 │   RH · Compras · Financeiro · Protocolo · Documentos    │

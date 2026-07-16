@@ -1,0 +1,2093 @@
+<!DOCTYPE html>
+<html lang="pt-BR" translate="no">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="google" content="notranslate">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plataforma Pólis — Design System</title>
+  <meta name="description" content="Design System e referência visual da Plataforma Pólis — ecossistema de gestão municipal. Saúde, Educação, Tributos e RH em uma única base de dados.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       DESIGN TOKENS — Fonte da verdade (preservado do original)
+       ============================================================ */
+    :root {
+      /* Entidades */
+      --prefeitura-base: #2563EB;
+      --prefeitura-dark: #1D4ED8;
+      --prefeitura-light: #EFF6FF;
+      --prefeitura-muted: #BFDBFE;
+
+      --saude-base: #0D9488;
+      --saude-dark: #0F766E;
+      --saude-light: #F0FDFA;
+      --saude-muted: #99F6E4;
+
+      --educacao-base: #D97706;
+      --educacao-dark: #B45309;
+      --educacao-light: #FFFBEB;
+      --educacao-muted: #FDE68A;
+
+      --assistencia-base: #7C3AED;
+      --assistencia-dark: #6D28D9;
+      --assistencia-light: #F5F3FF;
+      --assistencia-muted: #DDD6FE;
+
+      --samae-base: #0891B2;
+      --samae-dark: #0E7490;
+      --samae-light: #ECFEFF;
+      --samae-muted: #A5F3FC;
+
+      /* Cor ativa */
+      --cor-entidade: var(--prefeitura-base);
+      --cor-entidade-dark: var(--prefeitura-dark);
+      --cor-entidade-light: var(--prefeitura-light);
+      --cor-entidade-muted: var(--prefeitura-muted);
+
+      /* Neutros */
+      --cinza-50: #F8FAFC;
+      --cinza-100: #F1F5F9;
+      --cinza-200: #E2E8F0;
+      --cinza-300: #CBD5E1;
+      --cinza-400: #94A3B8;
+      --cinza-500: #64748B;
+      --cinza-600: #475569;
+      --cinza-700: #334155;
+      --cinza-800: #1E293B;
+      --cinza-900: #0F172A;
+
+      /* Semânticas */
+      --cor-sucesso: #16A34A;
+      --cor-sucesso-light: #F0FDF4;
+      --cor-sucesso-muted: #BBF7D0;
+      --cor-erro: #DC2626;
+      --cor-erro-light: #FEF2F2;
+      --cor-erro-muted: #FECACA;
+      --cor-aviso: #D97706;
+      --cor-aviso-light: #FFFBEB;
+      --cor-aviso-muted: #FDE68A;
+      --cor-info: #0284C7;
+      --cor-info-light: #F0F9FF;
+      --cor-info-muted: #BAE6FD;
+
+      /* Superfícies (usadas dentro da demo) */
+      --cor-fundo: #F1F5F9;
+      --cor-fundo-card: #FFFFFF;
+      --cor-borda: #E2E8F0;
+      --cor-borda-forte: #CBD5E1;
+
+      /* Texto (usados dentro da demo) */
+      --cor-texto: #1E293B;
+      --cor-texto-suave: #64748B;
+      --cor-texto-fraco: #94A3B8;
+      --cor-texto-invertido: #FFFFFF;
+
+      /* Sidebar */
+      --sidebar-fundo: #0F1523;
+      --sidebar-fundo-hover: rgba(255, 255, 255, 0.06);
+      --sidebar-fundo-ativo: rgba(255, 255, 255, 0.10);
+      --sidebar-texto: #94A3B8;
+      --sidebar-texto-ativo: #FFFFFF;
+      --sidebar-largura: 252px;
+
+      /* Tipografia */
+      --fonte-principal: 'Inter', system-ui, sans-serif;
+      --fonte-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+      --fonte-tamanho-xs: 11px;
+      --fonte-tamanho-sm: 13px;
+      --fonte-tamanho-base: 14px;
+      --fonte-tamanho-md: 15px;
+      --fonte-tamanho-lg: 18px;
+      --fonte-tamanho-xl: 22px;
+      --fonte-tamanho-2xl: 28px;
+      --fonte-peso-normal: 400;
+      --fonte-peso-medio: 500;
+      --fonte-peso-semi: 600;
+      --fonte-peso-bold: 700;
+
+      /* Espaçamento */
+      --espacamento-xs: 4px;
+      --espacamento-sm: 8px;
+      --espacamento-base: 16px;
+      --espacamento-lg: 24px;
+      --espacamento-xl: 32px;
+      --espacamento-2xl: 48px;
+
+      /* Forma */
+      --borda-raio-sm: 6px;
+      --borda-raio: 10px;
+      --borda-raio-lg: 14px;
+      --borda-raio-xl: 20px;
+      --borda-raio-pill: 999px;
+
+      /* Sombras */
+      --sombra-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --sombra-sm: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+      --sombra-card: 0 2px 8px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.04);
+      --sombra-hover: 0 4px 16px rgba(0, 0, 0, 0.10), 0 2px 4px rgba(0, 0, 0, 0.06);
+      --sombra-modal: 0 20px 60px rgba(0, 0, 0, 0.18), 0 4px 16px rgba(0, 0, 0, 0.08);
+      --sombra-dropdown: 0 8px 24px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06);
+
+      /* Transições */
+      --transicao-padrao: 150ms ease;
+      --transicao-lenta: 250ms ease;
+
+      /* ============================================================
+         DARK SHOWCASE LAYER — somente para a página de referência
+         ============================================================ */
+      --ds-bg: #09090B;
+      --ds-surface: rgba(255, 255, 255, 0.03);
+      --ds-surface-hover: rgba(255, 255, 255, 0.06);
+      --ds-border: rgba(255, 255, 255, 0.08);
+      --ds-border-hover: rgba(255, 255, 255, 0.15);
+      --ds-text: #FAFAFA;
+      --ds-text-muted: #A1A1AA;
+      --ds-text-dim: #52525B;
+      --ds-glass: rgba(255, 255, 255, 0.04);
+      --ds-glass-border: rgba(255, 255, 255, 0.06);
+      --ds-glow: var(--cor-entidade);
+    }
+
+    /* Cor ativa por entidade */
+    body.entidade-prefeitura {
+      --cor-entidade: var(--prefeitura-base);
+      --cor-entidade-dark: var(--prefeitura-dark);
+      --cor-entidade-light: var(--prefeitura-light);
+      --cor-entidade-muted: var(--prefeitura-muted);
+    }
+    body.entidade-saude {
+      --cor-entidade: var(--saude-base);
+      --cor-entidade-dark: var(--saude-dark);
+      --cor-entidade-light: var(--saude-light);
+      --cor-entidade-muted: var(--saude-muted);
+    }
+    body.entidade-educacao {
+      --cor-entidade: var(--educacao-base);
+      --cor-entidade-dark: var(--educacao-dark);
+      --cor-entidade-light: var(--educacao-light);
+      --cor-entidade-muted: var(--educacao-muted);
+    }
+    body.entidade-assistencia {
+      --cor-entidade: var(--assistencia-base);
+      --cor-entidade-dark: var(--assistencia-dark);
+      --cor-entidade-light: var(--assistencia-light);
+      --cor-entidade-muted: var(--assistencia-muted);
+    }
+    body.entidade-samae {
+      --cor-entidade: var(--samae-base);
+      --cor-entidade-dark: var(--samae-dark);
+      --cor-entidade-light: var(--samae-light);
+      --cor-entidade-muted: var(--samae-muted);
+    }
+
+    /* ============================================================
+       RESET + BASE
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--fonte-principal);
+      font-size: var(--fonte-tamanho-base);
+      color: var(--ds-text);
+      background: var(--ds-bg);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: var(--cor-entidade);
+      color: #fff;
+    }
+
+    /* Scrollbar global */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+    /* ============================================================
+       HERO SECTION
+       ============================================================ */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 48px 24px;
+    }
+
+    /* Animated grid background */
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%);
+      animation: gridPulse 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes gridPulse {
+      0% { opacity: 0.4; }
+      100% { opacity: 1; }
+    }
+
+    /* Radial glow */
+    .hero-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: var(--cor-entidade);
+      opacity: 0.07;
+      filter: blur(120px);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: background 0.6s ease, opacity 0.6s ease;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 720px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: var(--borda-raio-pill);
+      background: var(--ds-surface);
+      border: 1px solid var(--ds-border);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--ds-text-muted);
+      margin-bottom: 32px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .hero-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--cor-entidade);
+      animation: dotPulse 2s ease-in-out infinite;
+      transition: background 0.4s ease;
+    }
+
+    @keyframes dotPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .hero-title {
+      font-size: clamp(48px, 8vw, 88px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      margin-bottom: 8px;
+      background: linear-gradient(180deg, #FAFAFA 0%, #71717A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(14px, 2vw, 18px);
+      font-weight: 300;
+      color: var(--ds-text-muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+
+    .hero-description {
+      font-size: 16px;
+      color: var(--ds-text-dim);
+      line-height: 1.7;
+      max-width: 520px;
+      margin: 0 auto 48px;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat {
+      text-align: center;
+    }
+
+    .hero-stat-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--ds-text);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .hero-stat-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--ds-text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* Scroll indicator */
+    .hero-scroll {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--ds-text-dim);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      animation: scrollFloat 2s ease-in-out infinite;
+      cursor: pointer;
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 32px;
+      background: linear-gradient(180deg, var(--ds-text-dim), transparent);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollFloat {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    @keyframes scrollLine {
+      0% { opacity: 0; transform: scaleY(0); transform-origin: top; }
+      50% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+      100% { opacity: 0; transform: scaleY(1); transform-origin: bottom; }
+    }
+
+    /* ============================================================
+       SECTION STYLING
+       ============================================================ */
+    .ds-section {
+      padding: 80px 24px;
+      max-width: 1280px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .ds-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .ds-section-header {
+      margin-bottom: 48px;
+    }
+
+    .ds-section-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--cor-entidade);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 12px;
+      transition: color 0.4s ease;
+    }
+
+    .ds-section-title {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--ds-text);
+      margin-bottom: 8px;
+    }
+
+    .ds-section-desc {
+      font-size: 15px;
+      color: var(--ds-text-dim);
+      max-width: 560px;
+      line-height: 1.6;
+    }
+
+    /* Divider */
+    .ds-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--ds-border), transparent);
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* ============================================================
+       GLASS CARD
+       ============================================================ */
+    .glass-card {
+      background: var(--ds-glass);
+      border: 1px solid var(--ds-glass-border);
+      border-radius: 16px;
+      padding: 32px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .glass-card:hover {
+      border-color: var(--ds-border-hover);
+      box-shadow: 0 0 40px rgba(255, 255, 255, 0.02);
+    }
+
+    .glass-card-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ds-text);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .glass-card-title::before {
+      content: '';
+      width: 3px;
+      height: 14px;
+      background: var(--cor-entidade);
+      border-radius: 2px;
+      transition: background 0.4s ease;
+    }
+
+    /* ============================================================
+       ENTITY SWITCHER (pills horizontais)
+       ============================================================ */
+    .entity-switcher {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+
+    .entity-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: var(--borda-raio-pill);
+      border: 1px solid var(--ds-border);
+      background: var(--ds-surface);
+      color: var(--ds-text-muted);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: var(--fonte-principal);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .entity-pill:hover {
+      border-color: var(--ds-border-hover);
+      color: var(--ds-text);
+      background: var(--ds-surface-hover);
+    }
+
+    .entity-pill.ativa {
+      border-color: var(--cor-entidade);
+      color: var(--ds-text);
+      background: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 0 20px rgba(var(--cor-entidade-rgb, 37, 99, 235), 0.15);
+    }
+
+    .entity-pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .entity-pill.ativa .entity-pill-dot {
+      box-shadow: 0 0 8px currentColor;
+    }
+
+    /* ============================================================
+       DEVICE FRAME (Demo interativa)
+       ============================================================ */
+    .demo-wrapper {
+      padding: 0 24px 80px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .device-frame {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--ds-border);
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.05),
+        0 24px 80px rgba(0, 0, 0, 0.5),
+        0 0 60px rgba(var(--cor-entidade-rgb, 37, 99, 235), 0.06);
+      transition: box-shadow 0.5s ease, border-color 0.5s ease;
+      position: relative;
+    }
+
+    .device-frame::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 17px;
+      padding: 1px;
+      background: linear-gradient(
+        180deg,
+        rgba(255,255,255,0.1) 0%,
+        rgba(255,255,255,0.02) 50%,
+        rgba(var(--cor-entidade-rgb, 37, 99, 235), 0.1) 100%
+      );
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: xor;
+      -webkit-mask-composite: xor;
+      pointer-events: none;
+      transition: background 0.5s ease;
+      z-index: 10;
+    }
+
+    /* Title bar do device */
+    .device-titlebar {
+      height: 38px;
+      background: #111318;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .device-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      opacity: 0.6;
+    }
+
+    .device-titlebar-text {
+      flex: 1;
+      text-align: center;
+      font-size: 11px;
+      color: var(--ds-text-dim);
+      letter-spacing: 0.03em;
+    }
+
+    /* Interior do device — usa as cores light do design system */
+    .device-content {
+      display: flex;
+      height: 560px;
+    }
+
+    /* ============================================================
+       SIDEBAR (dentro da demo — preservado do original)
+       ============================================================ */
+    .polis-sidebar {
+      width: var(--sidebar-largura);
+      background: var(--sidebar-fundo);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .polis-entidade-switcher {
+      padding: var(--espacamento-sm) var(--espacamento-sm) 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding-bottom: var(--espacamento-sm);
+    }
+
+    .polis-entidade-btn {
+      display: flex;
+      align-items: center;
+      gap: var(--espacamento-sm);
+      padding: 7px var(--espacamento-sm);
+      border-radius: var(--borda-raio-sm);
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      width: 100%;
+      text-align: left;
+      transition: background var(--transicao-padrao);
+      font-family: var(--fonte-principal);
+    }
+
+    .polis-entidade-btn:hover { background: var(--sidebar-fundo-hover); }
+    .polis-entidade-btn.ativa { background: var(--sidebar-fundo-ativo); }
+
+    .polis-entidade-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .polis-entidade-nome {
+      font-size: var(--fonte-tamanho-xs);
+      font-weight: var(--fonte-peso-semi);
+      color: var(--sidebar-texto);
+      letter-spacing: 0.02em;
+    }
+
+    .polis-entidade-btn.ativa .polis-entidade-nome { color: var(--sidebar-texto-ativo); }
+
+    .polis-sidebar-header {
+      padding: var(--espacamento-base);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      align-items: center;
+      gap: var(--espacamento-sm);
+    }
+
+    .polis-sidebar-logo-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: var(--borda-raio-sm);
+      background: var(--cor-entidade);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: var(--fonte-peso-bold);
+      color: #fff;
+      flex-shrink: 0;
+      transition: background var(--transicao-lenta);
+    }
+
+    .polis-sidebar-titulo { font-size: var(--fonte-tamanho-sm); font-weight: var(--fonte-peso-semi); color: var(--sidebar-texto-ativo); }
+    .polis-sidebar-sub { font-size: var(--fonte-tamanho-xs); color: var(--sidebar-texto); }
+
+    .polis-sidebar-nav {
+      flex: 1;
+      overflow-y: auto;
+      padding: var(--espacamento-xs) 0;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+    }
+
+    .polis-sidebar-nav::-webkit-scrollbar { width: 4px; }
+    .polis-sidebar-nav::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 2px; }
+
+    .polis-sidebar-grupo-label {
+      font-size: 10px;
+      font-weight: var(--fonte-peso-semi);
+      color: var(--sidebar-texto);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: var(--espacamento-base) var(--espacamento-base) var(--espacamento-xs);
+      opacity: 0.45;
+    }
+
+    .polis-sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px var(--espacamento-base);
+      margin: 1px var(--espacamento-xs);
+      border-radius: var(--borda-raio-sm);
+      color: var(--sidebar-texto);
+      font-size: var(--fonte-tamanho-sm);
+      font-weight: var(--fonte-peso-medio);
+      cursor: pointer;
+      transition: background var(--transicao-padrao), color var(--transicao-padrao);
+      position: relative;
+      text-decoration: none;
+    }
+
+    .polis-sidebar-item:hover { background: var(--sidebar-fundo-hover); color: var(--sidebar-texto-ativo); }
+
+    .polis-sidebar-item.ativo {
+      background: var(--sidebar-fundo-ativo);
+      color: var(--sidebar-texto-ativo);
+    }
+
+    .polis-sidebar-item.ativo::before {
+      content: '';
+      position: absolute;
+      left: -4px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 18px;
+      background: var(--cor-entidade);
+      border-radius: 0 2px 2px 0;
+      transition: background var(--transicao-lenta);
+    }
+
+    .polis-sidebar-icone { width: 16px; height: 16px; font-size: 14px; flex-shrink: 0; opacity: 0.75; }
+    .polis-sidebar-item.ativo .polis-sidebar-icone { opacity: 1; }
+
+    .polis-sidebar-subitem {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px var(--espacamento-base) 6px 40px;
+      margin: 1px var(--espacamento-xs);
+      border-radius: var(--borda-raio-sm);
+      color: var(--sidebar-texto);
+      font-size: 12px;
+      font-weight: var(--fonte-peso-medio);
+      cursor: pointer;
+      transition: background var(--transicao-padrao), color var(--transicao-padrao);
+    }
+
+    .polis-sidebar-subitem:hover { background: var(--sidebar-fundo-hover); color: var(--sidebar-texto-ativo); }
+    .polis-sidebar-subitem.ativo { color: var(--cor-entidade); font-weight: var(--fonte-peso-semi); }
+    .polis-sidebar-subitem.ativo::before { content: '›'; position: absolute; left: 28px; color: var(--cor-entidade); }
+
+    .polis-sidebar-toggle { margin-left: auto; font-size: 10px; opacity: 0.5; transition: transform var(--transicao-padrao); }
+    .polis-sidebar-item.aberto .polis-sidebar-toggle { transform: rotate(180deg); }
+
+    .polis-sidebar-rodape { padding: var(--espacamento-sm); border-top: 1px solid rgba(255, 255, 255, 0.06); }
+
+    .polis-sidebar-usuario {
+      display: flex;
+      align-items: center;
+      gap: var(--espacamento-sm);
+      padding: var(--espacamento-sm);
+      border-radius: var(--borda-raio-sm);
+      cursor: pointer;
+      transition: background var(--transicao-padrao);
+    }
+
+    .polis-sidebar-usuario:hover { background: var(--sidebar-fundo-hover); }
+
+    .polis-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: var(--borda-raio-pill);
+      background: var(--cor-entidade);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: var(--fonte-peso-bold);
+      flex-shrink: 0;
+      transition: background var(--transicao-lenta);
+    }
+
+    .polis-sidebar-usuario-nome { font-size: var(--fonte-tamanho-xs); font-weight: var(--fonte-peso-semi); color: var(--sidebar-texto-ativo); }
+    .polis-sidebar-usuario-papel { font-size: 11px; color: var(--sidebar-texto); }
+
+    /* ============================================================
+       TOPBAR + MAIN (dentro da demo)
+       ============================================================ */
+    .polis-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .polis-topbar {
+      background: var(--cor-fundo-card);
+      border-bottom: 1px solid var(--cor-borda);
+      height: 52px;
+      padding: 0 var(--espacamento-xl);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .polis-breadcrumb { display: flex; align-items: center; gap: 6px; font-size: var(--fonte-tamanho-sm); }
+    .polis-breadcrumb-item { color: var(--cor-texto-suave); }
+    .polis-breadcrumb-item.ativo { color: var(--cor-texto); font-weight: var(--fonte-peso-medio); }
+    .polis-breadcrumb-sep { color: var(--cor-texto-fraco); font-size: 12px; }
+    .polis-topbar-acoes { display: flex; align-items: center; gap: var(--espacamento-sm); }
+
+    .polis-conteudo {
+      flex: 1;
+      overflow-y: auto;
+      padding: var(--espacamento-xl);
+    }
+
+    /* ============================================================
+       KPI CARDS
+       ============================================================ */
+    .polis-card-kpi {
+      background: var(--cor-fundo-card);
+      border-radius: var(--borda-raio-lg);
+      border: 1px solid var(--cor-borda);
+      box-shadow: var(--sombra-card);
+      padding: var(--espacamento-base) var(--espacamento-lg);
+      display: flex;
+      align-items: center;
+      gap: var(--espacamento-base);
+    }
+
+    .polis-card-kpi-icone {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--borda-raio);
+      background: var(--cor-entidade-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+      transition: background var(--transicao-lenta);
+    }
+
+    .polis-card-kpi-label { font-size: var(--fonte-tamanho-xs); color: var(--cor-texto-suave); margin-bottom: 2px; }
+    .polis-card-kpi-valor { font-size: var(--fonte-tamanho-xl); font-weight: var(--fonte-peso-bold); color: var(--cor-texto); line-height: 1; }
+    .polis-card-kpi-var { font-size: var(--fonte-tamanho-xs); color: var(--cor-sucesso); margin-top: 2px; }
+
+    /* ============================================================
+       TABLE
+       ============================================================ */
+    .polis-tabela-wrapper {
+      background: var(--cor-fundo-card);
+      border-radius: var(--borda-raio-lg);
+      border: 1px solid var(--cor-borda);
+      box-shadow: var(--sombra-card);
+      overflow: hidden;
+    }
+
+    .polis-tabela-header {
+      padding: var(--espacamento-base) var(--espacamento-lg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--cor-borda);
+    }
+
+    .polis-tabela-titulo { font-size: var(--fonte-tamanho-md); font-weight: var(--fonte-peso-semi); }
+    .polis-tabela-total { font-size: var(--fonte-tamanho-sm); color: var(--cor-texto-suave); }
+
+    .polis-tabela { width: 100%; border-collapse: collapse; }
+
+    .polis-tabela th {
+      text-align: left;
+      padding: 9px var(--espacamento-lg);
+      font-size: var(--fonte-tamanho-xs);
+      font-weight: var(--fonte-peso-semi);
+      color: var(--cor-texto-suave);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: var(--cinza-50);
+      border-bottom: 1px solid var(--cor-borda);
+      white-space: nowrap;
+    }
+
+    .polis-tabela td {
+      padding: 11px var(--espacamento-lg);
+      font-size: var(--fonte-tamanho-sm);
+      border-bottom: 1px solid var(--cinza-100);
+    }
+
+    .polis-tabela tr:last-child td { border-bottom: none; }
+    .polis-tabela tbody tr { transition: background var(--transicao-padrao); }
+    .polis-tabela tbody tr:hover { background: var(--cinza-50); }
+
+    /* ============================================================
+       BADGES
+       ============================================================ */
+    .polis-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 9px;
+      border-radius: var(--borda-raio-pill);
+      font-size: var(--fonte-tamanho-xs);
+      font-weight: var(--fonte-peso-semi);
+      line-height: 1.5;
+    }
+
+    .polis-badge::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: currentColor;
+      flex-shrink: 0;
+    }
+
+    .polis-badge-ativo { background: var(--cor-sucesso-light); color: var(--cor-sucesso); }
+    .polis-badge-inativo { background: var(--cinza-100); color: var(--cinza-500); }
+    .polis-badge-pendente { background: var(--cor-aviso-light); color: var(--cor-aviso); }
+    .polis-badge-erro { background: var(--cor-erro-light); color: var(--cor-erro); }
+    .polis-badge-info { background: var(--cor-info-light); color: var(--cor-info); }
+    .polis-badge-entidade { background: var(--cor-entidade-light); color: var(--cor-entidade); }
+
+    /* ============================================================
+       BUTTONS
+       ============================================================ */
+    .polis-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: var(--borda-raio);
+      font-family: var(--fonte-principal);
+      font-size: var(--fonte-tamanho-sm);
+      font-weight: var(--fonte-peso-medio);
+      cursor: pointer;
+      border: 1.5px solid transparent;
+      transition: all var(--transicao-padrao);
+      text-decoration: none;
+      white-space: nowrap;
+      line-height: 1;
+    }
+
+    .polis-btn:active { transform: scale(0.98); }
+
+    .polis-btn-primario { background: var(--cor-entidade); color: #fff; border-color: var(--cor-entidade); }
+    .polis-btn-primario:hover { background: var(--cor-entidade-dark); border-color: var(--cor-entidade-dark); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); }
+
+    .polis-btn-secundario { background: transparent; color: var(--cor-entidade); border-color: var(--cor-entidade-muted); }
+    .polis-btn-secundario:hover { background: var(--cor-entidade-light); border-color: var(--cor-entidade); }
+
+    .polis-btn-ghost { background: transparent; color: var(--cor-texto-suave); border-color: transparent; }
+    .polis-btn-ghost:hover { background: var(--cinza-100); color: var(--cor-texto); }
+
+    .polis-btn-perigo { background: var(--cor-erro); color: #fff; border-color: var(--cor-erro); }
+    .polis-btn-perigo:hover { background: #B91C1C; box-shadow: 0 2px 8px rgba(220, 38, 38, 0.25); }
+
+    .polis-btn-sm { padding: 5px 12px; font-size: var(--fonte-tamanho-xs); }
+    .polis-btn-lg { padding: 11px 22px; font-size: var(--fonte-tamanho-md); }
+
+    .polis-btn-icone {
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: 1.5px solid var(--cor-borda);
+      border-radius: var(--borda-raio);
+      color: var(--cor-texto-suave);
+      cursor: pointer;
+      transition: all var(--transicao-padrao);
+      font-size: 13px;
+    }
+
+    .polis-btn-icone:hover { background: var(--cinza-100); color: var(--cor-texto); border-color: var(--cor-borda-forte); }
+
+    /* ============================================================
+       PAGINATION
+       ============================================================ */
+    .polis-paginacao {
+      display: flex;
+      align-items: center;
+      gap: var(--espacamento-xs);
+      padding: var(--espacamento-base) var(--espacamento-lg);
+      border-top: 1px solid var(--cor-borda);
+    }
+
+    .polis-paginacao-info { font-size: var(--fonte-tamanho-sm); color: var(--cor-texto-suave); flex: 1; }
+
+    .polis-paginacao-btn {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px solid var(--cor-borda);
+      border-radius: var(--borda-raio-sm);
+      font-size: var(--fonte-tamanho-sm);
+      color: var(--cor-texto-suave);
+      cursor: pointer;
+      transition: all var(--transicao-padrao);
+      background: transparent;
+      font-family: var(--fonte-principal);
+    }
+
+    .polis-paginacao-btn:hover { background: var(--cinza-100); color: var(--cor-texto); }
+    .polis-paginacao-btn.ativo { background: var(--cor-entidade); color: #fff; border-color: var(--cor-entidade); }
+
+    /* ============================================================
+       FORMS
+       ============================================================ */
+    .polis-form-grupo { display: flex; flex-direction: column; gap: var(--espacamento-xs); }
+    .polis-form-label { font-size: var(--fonte-tamanho-sm); font-weight: var(--fonte-peso-medio); color: var(--cor-texto); }
+    .polis-form-label-obr::after { content: ' *'; color: var(--cor-erro); }
+
+    .polis-form-input,
+    .polis-form-select,
+    .polis-form-textarea {
+      width: 100%;
+      padding: 9px 12px;
+      font-family: var(--fonte-principal);
+      font-size: var(--fonte-tamanho-base);
+      color: var(--cor-texto);
+      background: var(--cor-fundo-card);
+      border: 1.5px solid var(--cor-borda);
+      border-radius: var(--borda-raio);
+      transition: border-color var(--transicao-padrao), box-shadow var(--transicao-padrao);
+      outline: none;
+      -webkit-appearance: none;
+    }
+
+    .polis-form-input:focus,
+    .polis-form-select:focus,
+    .polis-form-textarea:focus {
+      border-color: var(--cor-entidade);
+      box-shadow: 0 0 0 3px var(--cor-entidade-light);
+    }
+
+    .polis-form-input::placeholder { color: var(--cor-texto-fraco); }
+    .polis-form-input.erro { border-color: var(--cor-erro); }
+    .polis-form-erro-msg { font-size: var(--fonte-tamanho-xs); color: var(--cor-erro); }
+    .polis-form-hint { font-size: var(--fonte-tamanho-xs); color: var(--cor-texto-suave); }
+    .polis-form-textarea { resize: vertical; min-height: 88px; }
+
+    /* ============================================================
+       MODAL
+       ============================================================ */
+    .polis-modal {
+      background: var(--cor-fundo-card);
+      border-radius: var(--borda-raio-xl);
+      box-shadow: var(--sombra-modal);
+      width: 100%;
+      max-width: 460px;
+    }
+
+    .polis-modal-header {
+      padding: var(--espacamento-lg);
+      border-bottom: 1px solid var(--cor-borda);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .polis-modal-titulo { font-size: var(--fonte-tamanho-md); font-weight: var(--fonte-peso-semi); }
+    .polis-modal-corpo { padding: var(--espacamento-lg); }
+
+    .polis-modal-rodape {
+      padding: var(--espacamento-base) var(--espacamento-lg);
+      border-top: 1px solid var(--cor-borda);
+      display: flex;
+      justify-content: flex-end;
+      gap: var(--espacamento-sm);
+    }
+
+    /* ============================================================
+       TOASTS
+       ============================================================ */
+    .polis-toast {
+      display: flex;
+      align-items: center;
+      gap: var(--espacamento-sm);
+      padding: 11px var(--espacamento-base);
+      background: var(--cinza-900);
+      color: #fff;
+      border-radius: var(--borda-raio-lg);
+      font-size: var(--fonte-tamanho-sm);
+      box-shadow: var(--sombra-dropdown);
+      min-width: 260px;
+      max-width: 380px;
+      border-left: 3px solid;
+    }
+
+    .polis-toast-sucesso { border-color: var(--cor-sucesso); }
+    .polis-toast-erro { border-color: var(--cor-erro); }
+    .polis-toast-aviso { border-color: var(--cor-aviso); }
+    .polis-toast-info { border-color: var(--cor-info); }
+
+    /* ============================================================
+       ALERTS
+       ============================================================ */
+    .polis-alert {
+      display: flex;
+      gap: var(--espacamento-sm);
+      padding: var(--espacamento-base);
+      border-radius: var(--borda-raio);
+      font-size: var(--fonte-tamanho-sm);
+      border: 1px solid;
+      line-height: 1.5;
+    }
+
+    .polis-alert-sucesso { background: var(--cor-sucesso-light); border-color: var(--cor-sucesso-muted); color: #15803D; }
+    .polis-alert-erro { background: var(--cor-erro-light); border-color: var(--cor-erro-muted); color: #B91C1C; }
+    .polis-alert-aviso { background: var(--cor-aviso-light); border-color: var(--cor-aviso-muted); color: #92400E; }
+    .polis-alert-info { background: var(--cor-info-light); border-color: var(--cor-info-muted); color: #0369A1; }
+
+    /* ============================================================
+       COMPONENT GALLERY
+       ============================================================ */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 20px;
+    }
+
+    .gallery-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    /* Code token */
+    .code-token {
+      font-family: var(--fonte-mono);
+      font-size: 11px;
+      background: rgba(255, 255, 255, 0.06);
+      color: #7DD3FC;
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: inline-block;
+    }
+
+    /* Color swatch */
+    .swatch-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+    }
+
+    .swatch {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .swatch-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .swatch-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ds-text);
+    }
+
+    .swatch-hex {
+      font-size: 11px;
+      font-family: var(--fonte-mono);
+      color: var(--ds-text-dim);
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .ds-footer {
+      text-align: center;
+      padding: 48px 24px;
+      border-top: 1px solid var(--ds-border);
+    }
+
+    .ds-footer-logo {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ds-text);
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .ds-footer-text {
+      font-size: 12px;
+      color: var(--ds-text-dim);
+    }
+
+    .ds-footer-links {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      margin-top: 16px;
+    }
+
+    .ds-footer-link {
+      font-size: 12px;
+      color: var(--ds-text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .ds-footer-link:hover { color: var(--ds-text); }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 768px) {
+      .hero-stats { gap: 24px; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-grid-3 { grid-template-columns: 1fr; }
+      .device-content { flex-direction: column; height: auto; }
+      .polis-sidebar { width: 100%; height: 200px; }
+      .ds-section { padding: 48px 16px; }
+      .demo-wrapper { padding: 0 16px 48px; }
+    }
+  </style>
+</head>
+
+<body class="entidade-prefeitura" id="body">
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="hero" id="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-glow" id="hero-glow"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Design System v2.0 — 2027
+      </div>
+      <h1 class="hero-title">PÓLIS</h1>
+      <p class="hero-subtitle">Design System</p>
+      <p class="hero-description">
+        Referência visual do ecossistema de gestão municipal. Uma única fonte de verdade para cores, componentes e padrões — garantindo consistência em todas as entidades.
+      </p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-value">5</div>
+          <div class="hero-stat-label">Entidades</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">12</div>
+          <div class="hero-stat-label">Módulos</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">48</div>
+          <div class="hero-stat-label">Componentes</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">1</div>
+          <div class="hero-stat-label">Base de Dados</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll" onclick="document.getElementById('demo-section').scrollIntoView({behavior:'smooth'})">
+      <span>Explorar</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       DEMO INTERATIVA
+       ============================================================ -->
+  <div class="ds-divider"></div>
+
+  <section class="ds-section" id="demo-section">
+    <div class="ds-section-header" style="text-align:center;">
+      <div class="ds-section-label">Preview Interativo</div>
+      <h2 class="ds-section-title">Sistema em Ação</h2>
+      <p class="ds-section-desc" style="margin:0 auto;">Clique nas entidades para ver a identidade visual mudar em tempo real por todo o sistema.</p>
+    </div>
+  </section>
+
+  <div class="demo-wrapper">
+    <!-- Entity Switcher Pills -->
+    <div class="entity-switcher" id="entity-switcher">
+      <button class="entity-pill ativa" onclick="trocarEntidade(this,'prefeitura')">
+        <span class="entity-pill-dot" style="background:#2563EB;"></span>
+        Prefeitura
+      </button>
+      <button class="entity-pill" onclick="trocarEntidade(this,'saude')">
+        <span class="entity-pill-dot" style="background:#0D9488;"></span>
+        Saúde
+      </button>
+      <button class="entity-pill" onclick="trocarEntidade(this,'educacao')">
+        <span class="entity-pill-dot" style="background:#D97706;"></span>
+        Educação
+      </button>
+      <button class="entity-pill" onclick="trocarEntidade(this,'assistencia')">
+        <span class="entity-pill-dot" style="background:#7C3AED;"></span>
+        Assist. Social
+      </button>
+      <button class="entity-pill" onclick="trocarEntidade(this,'samae')">
+        <span class="entity-pill-dot" style="background:#0891B2;"></span>
+        SAMAE
+      </button>
+    </div>
+
+    <!-- Device Frame -->
+    <div class="device-frame" id="device-frame">
+      <div class="device-titlebar">
+        <div class="device-dot" style="background:#FF5F57;"></div>
+        <div class="device-dot" style="background:#FEBC2E;"></div>
+        <div class="device-dot" style="background:#28C840;"></div>
+        <span class="device-titlebar-text">plataforma-polis.app — <span id="demo-entidade-nome">Prefeitura</span></span>
+        <div style="width:50px;"></div>
+      </div>
+
+      <div class="device-content">
+        <!-- Sidebar -->
+        <div class="polis-sidebar" style="width:252px;">
+          <div class="polis-entidade-switcher" style="padding-top:var(--espacamento-base);">
+            <button class="polis-entidade-btn ativa" data-entidade="prefeitura" onclick="trocarEntidade(this,'prefeitura')">
+              <span class="polis-entidade-dot" style="background:#2563EB;"></span>
+              <span class="polis-entidade-nome">Prefeitura</span>
+            </button>
+            <button class="polis-entidade-btn" data-entidade="saude" onclick="trocarEntidade(this,'saude')">
+              <span class="polis-entidade-dot" style="background:#0D9488;"></span>
+              <span class="polis-entidade-nome">Saúde</span>
+            </button>
+            <button class="polis-entidade-btn" data-entidade="educacao" onclick="trocarEntidade(this,'educacao')">
+              <span class="polis-entidade-dot" style="background:#D97706;"></span>
+              <span class="polis-entidade-nome">Educação</span>
+            </button>
+            <button class="polis-entidade-btn" data-entidade="assistencia" onclick="trocarEntidade(this,'assistencia')">
+              <span class="polis-entidade-dot" style="background:#7C3AED;"></span>
+              <span class="polis-entidade-nome">Assist. Social</span>
+            </button>
+            <button class="polis-entidade-btn" data-entidade="samae" onclick="trocarEntidade(this,'samae')">
+              <span class="polis-entidade-dot" style="background:#0891B2;"></span>
+              <span class="polis-entidade-nome">SAMAE</span>
+            </button>
+          </div>
+
+          <nav class="polis-sidebar-nav">
+            <div class="polis-sidebar-grupo-label">Módulos</div>
+            <div class="polis-sidebar-item aberto ativo" onclick="toggleAccordion(this)">
+              <span class="polis-sidebar-icone">👤</span>
+              <span>Recursos Humanos</span>
+              <span class="polis-sidebar-toggle">▾</span>
+            </div>
+            <div class="accordion-body">
+              <div class="polis-sidebar-subitem ativo" style="position:relative;">Funcionários</div>
+              <div class="polis-sidebar-subitem">Ponto Eletrônico</div>
+              <div class="polis-sidebar-subitem">Folha de Pagamento</div>
+              <div class="polis-sidebar-subitem">Férias</div>
+            </div>
+            <div class="polis-sidebar-item" onclick="toggleAccordion(this)">
+              <span class="polis-sidebar-icone">💼</span>
+              <span>Compras</span>
+              <span class="polis-sidebar-toggle">▾</span>
+            </div>
+            <div class="accordion-body" style="display:none;">
+              <div class="polis-sidebar-subitem">Licitações</div>
+              <div class="polis-sidebar-subitem">Contratos</div>
+              <div class="polis-sidebar-subitem">Almoxarifado</div>
+            </div>
+            <div class="polis-sidebar-item" onclick="toggleAccordion(this)">
+              <span class="polis-sidebar-icone">💰</span>
+              <span>Financeiro</span>
+              <span class="polis-sidebar-toggle">▾</span>
+            </div>
+            <div class="accordion-body" style="display:none;">
+              <div class="polis-sidebar-subitem">Contabilidade</div>
+              <div class="polis-sidebar-subitem">Tesouraria</div>
+              <div class="polis-sidebar-subitem">Planejamento</div>
+            </div>
+            <div class="polis-sidebar-item">
+              <span class="polis-sidebar-icone">📄</span>
+              <span>Protocolo</span>
+            </div>
+            <div class="polis-sidebar-item">
+              <span class="polis-sidebar-icone">📁</span>
+              <span>Documentos</span>
+            </div>
+            <div class="polis-sidebar-item" onclick="toggleAccordion(this)">
+              <span class="polis-sidebar-icone">🏗️</span>
+              <span>Obras</span>
+              <span class="polis-sidebar-toggle">▾</span>
+            </div>
+            <div class="accordion-body" style="display:none;">
+              <div class="polis-sidebar-subitem">Obras Públicas</div>
+              <div class="polis-sidebar-subitem">Medições</div>
+            </div>
+          </nav>
+
+          <div class="polis-sidebar-rodape">
+            <div class="polis-sidebar-usuario">
+              <div class="polis-avatar" id="demo-avatar">JA</div>
+              <div>
+                <div class="polis-sidebar-usuario-nome">João Administrador</div>
+                <div class="polis-sidebar-usuario-papel">Gestor RH</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main content -->
+        <div class="polis-main" style="background:var(--cor-fundo);">
+          <div class="polis-topbar">
+            <div class="polis-breadcrumb">
+              <span class="polis-breadcrumb-item" id="demo-breadcrumb-entidade">Prefeitura</span>
+              <span class="polis-breadcrumb-sep">›</span>
+              <span class="polis-breadcrumb-item">Recursos Humanos</span>
+              <span class="polis-breadcrumb-sep">›</span>
+              <span class="polis-breadcrumb-item ativo">Funcionários</span>
+            </div>
+            <div class="polis-topbar-acoes">
+              <button class="polis-btn polis-btn-ghost polis-btn-sm">🔔</button>
+              <button class="polis-btn polis-btn-primario polis-btn-sm">+ Novo</button>
+            </div>
+          </div>
+          <div class="polis-conteudo">
+            <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:20px;">
+              <div class="polis-card-kpi">
+                <div class="polis-card-kpi-icone">👥</div>
+                <div>
+                  <div class="polis-card-kpi-label">Funcionários Ativos</div>
+                  <div class="polis-card-kpi-valor">342</div>
+                  <div class="polis-card-kpi-var">↑ 3 este mês</div>
+                </div>
+              </div>
+              <div class="polis-card-kpi">
+                <div class="polis-card-kpi-icone">📅</div>
+                <div>
+                  <div class="polis-card-kpi-label">De Férias</div>
+                  <div class="polis-card-kpi-valor">18</div>
+                </div>
+              </div>
+              <div class="polis-card-kpi">
+                <div class="polis-card-kpi-icone">⏸️</div>
+                <div>
+                  <div class="polis-card-kpi-label">Afastamentos</div>
+                  <div class="polis-card-kpi-valor">7</div>
+                </div>
+              </div>
+            </div>
+            <div class="polis-tabela-wrapper">
+              <div class="polis-tabela-header">
+                <span class="polis-tabela-titulo">Funcionários</span>
+                <span class="polis-tabela-total">342 registros</span>
+              </div>
+              <table class="polis-tabela">
+                <thead>
+                  <tr>
+                    <th>Nome</th>
+                    <th>Matrícula</th>
+                    <th>Cargo</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Ana Paula Ferreira</strong></td>
+                    <td><span style="font-family:var(--fonte-mono);font-size:11px">RH-0241</span></td>
+                    <td>Auxiliar Administrativo</td>
+                    <td><span class="polis-badge polis-badge-ativo">Ativo</span></td>
+                    <td style="display:flex;gap:4px;"><button class="polis-btn-icone">✏️</button><button class="polis-btn-icone">👁️</button></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Carlos Eduardo Lima</strong></td>
+                    <td><span style="font-family:var(--fonte-mono);font-size:11px">RH-0198</span></td>
+                    <td>Engenheiro Civil</td>
+                    <td><span class="polis-badge polis-badge-pendente">Férias</span></td>
+                    <td style="display:flex;gap:4px;"><button class="polis-btn-icone">✏️</button><button class="polis-btn-icone">👁️</button></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Márcia Santos</strong></td>
+                    <td><span style="font-family:var(--fonte-mono);font-size:11px">RH-0087</span></td>
+                    <td>Contadora</td>
+                    <td><span class="polis-badge polis-badge-info">Afastada</span></td>
+                    <td style="display:flex;gap:4px;"><button class="polis-btn-icone">✏️</button><button class="polis-btn-icone">👁️</button></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="polis-paginacao">
+                <span class="polis-paginacao-info">Mostrando 1–25 de 342</span>
+                <button class="polis-paginacao-btn">‹</button>
+                <button class="polis-paginacao-btn ativo">1</button>
+                <button class="polis-paginacao-btn">2</button>
+                <button class="polis-paginacao-btn">3</button>
+                <button class="polis-paginacao-btn">›</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       COMPONENT GALLERY
+       ============================================================ -->
+  <div class="ds-divider"></div>
+
+  <!-- IDENTIDADE VISUAL DAS ENTIDADES -->
+  <section class="ds-section" id="sec-cores">
+    <div class="ds-section-header">
+      <div class="ds-section-label">Identidade Visual</div>
+      <h2 class="ds-section-title">Paleta de Entidades</h2>
+      <p class="ds-section-desc">Cada entidade tem sua identidade cromática. A classe no <span class="code-token">body</span> ativa automaticamente todas as variáveis.</p>
+    </div>
+
+    <div class="gallery-grid">
+      <!-- Prefeitura -->
+      <div class="glass-card">
+        <div class="glass-card-title">Prefeitura</div>
+        <div class="swatch-row">
+          <div class="swatch" style="background:#2563EB;"></div>
+          <div class="swatch-info">
+            <span class="swatch-name">Base</span>
+            <span class="swatch-hex">#2563EB</span>
+          </div>
+        </div>
+        <div class="swatch-row">
+          <div class="swatch" style="background:#1D4ED8;"></div>
+          <div class="swatch-info">
+            <span class="swatch-name">Dark</span>
+            <span class="swatch-hex">#1D4ED8</span>
+          </div>
+        </div>
+        <div class="swatch-row">
+          <div class="swatch" style="background:#EFF6FF;"></div>
+          <div class="swatch-info">
+            <span class="swatch-name">Light</span>
+            <span class="swatch-hex">#EFF6FF</span>
+          </div>
+        </div>
+        <div style="margin-top:12px;">
+          <span class="code-token">entidade-prefeitura</span>
+        </div>
+      </div>
+      <!-- Saúde -->
+      <div class="glass-card">
+        <div class="glass-card-title">Saúde</div>
+        <div class="swatch-row">
+          <div class="swatch" style="background:#0D9488;"></div>
+          <div class="swatch-info">
+            <span class="swatch-name">Base</span>
+            <span class="swatch-hex">#0D9488</span>
+          </div>
+        </div>
+        <div class="swatch-row">
+          <div class="swatch" style="background:#0F766E;"></div>
+          <div class="swatch-info">
+            <span class="swatch-name">Dark</span>
+            <span class="swatch-hex">#0F766E</span>
+          </div>
+        </div>
+        <div class="swatch-row">
+          <div class="swatch" style="background:#F0FDFA;"></div>
+          <div class="swatch-info">
+            <span class="swatch-name">Light</span>
+            <span class="swatch-hex">#F0FDFA</span>
+          </div>
+        </div>
+        <div style="margin-top:12px;">
+          <span class="code-token">entidade-saude</span>
+        </div>
+      </div>
+      <!-- Educação -->
+      <div class="glass-card">
+        <div class="glass-card-title">Educação</div>
+        <div class="swatch-row">
+          <div class="swatch" style="background:#D97706;"></div>
+          <div class="swatch-info">
+            <span class="swatch-name">Base</span>
+            <span class="swatch-hex">#D97706</span>
+          </div>
+        </div>
+        <div class="swatch-row">
+          <div class="swatch" style="background:#B45309;"></div>
+          <div class="swatch-info">
+            <span class="swatch-name">Dark</span>
+            <span class="swatch-hex">#B45309</span>
+          </div>
+        </div>
+        <div class="swatch-row">
+          <div class="swatch" style="background:#FFFBEB;"></div>
+          <div class="swatch-info">
+            <span class="swatch-name">Light</span>
+            <span class="swatch-hex">#FFFBEB</span>
+          </div>
+        </div>
+        <div style="margin-top:12px;">
+          <span class="code-token">entidade-educacao</span>
+        </div>
+      </div>
+      <!-- Assistência Social -->
+      <div class="glass-card">
+        <div class="glass-card-title">Assistência Social</div>
+        <div class="swatch-row">
+          <div class="swatch" style="background:#7C3AED;"></div>
+          <div class="swatch-info">
+            <span class="swatch-name">Base</span>
+            <span class="swatch-hex">#7C3AED</span>
+          </div>
+        </div>
+        <div class="swatch-row">
+          <div class="swatch" style="background:#6D28D9;"></div>
+          <div class="swatch-info">
+            <span class="swatch-name">Dark</span>
+            <span class="swatch-hex">#6D28D9</span>
+          </div>
+        </div>
+        <div class="swatch-row">
+          <div class="swatch" style="background:#F5F3FF;"></div>
+          <div class="swatch-info">
+            <span class="swatch-name">Light</span>
+            <span class="swatch-hex">#F5F3FF</span>
+          </div>
+        </div>
+        <div style="margin-top:12px;">
+          <span class="code-token">entidade-assistencia</span>
+        </div>
+      </div>
+      <!-- SAMAE -->
+      <div class="glass-card">
+        <div class="glass-card-title">SAMAE</div>
+        <div class="swatch-row">
+          <div class="swatch" style="background:#0891B2;"></div>
+          <div class="swatch-info">
+            <span class="swatch-name">Base</span>
+            <span class="swatch-hex">#0891B2</span>
+          </div>
+        </div>
+        <div class="swatch-row">
+          <div class="swatch" style="background:#0E7490;"></div>
+          <div class="swatch-info">
+            <span class="swatch-name">Dark</span>
+            <span class="swatch-hex">#0E7490</span>
+          </div>
+        </div>
+        <div class="swatch-row">
+          <div class="swatch" style="background:#ECFEFF;"></div>
+          <div class="swatch-info">
+            <span class="swatch-name">Light</span>
+            <span class="swatch-hex">#ECFEFF</span>
+          </div>
+        </div>
+        <div style="margin-top:12px;">
+          <span class="code-token">entidade-samae</span>
+        </div>
+      </div>
+      <!-- Nota -->
+      <div class="glass-card" style="display:flex;flex-direction:column;justify-content:center;">
+        <p style="font-size:13px;color:var(--ds-text-muted);line-height:1.7;">
+          A classe <span class="code-token">entidade-[nome]</span> é aplicada no <strong style="color:var(--ds-text);">&lt;body&gt;</strong> pelo Django via context processor. Todos os componentes que usam <span class="code-token">var(--cor-entidade)</span> mudam automaticamente. Nunca hardcode a cor de entidade.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="ds-divider"></div>
+
+  <!-- BADGES -->
+  <section class="ds-section" id="sec-badges">
+    <div class="ds-section-header">
+      <div class="ds-section-label">Status & Indicadores</div>
+      <h2 class="ds-section-title">Badges</h2>
+      <p class="ds-section-desc">Indicadores visuais de estado. Gerados via templatetag Django.</p>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="glass-card">
+        <div class="glass-card-title">Status Padrão</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <span class="polis-badge polis-badge-ativo">Ativo</span>
+          <span class="polis-badge polis-badge-inativo">Inativo</span>
+          <span class="polis-badge polis-badge-pendente">Pendente</span>
+          <span class="polis-badge polis-badge-erro">Bloqueado</span>
+          <span class="polis-badge polis-badge-info">Em análise</span>
+        </div>
+      </div>
+      <div class="glass-card">
+        <div class="glass-card-title">Uso</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <span class="code-token">{% badge_status obj.status %}</span>
+          <span class="code-token">{% badge_status obj.status mapa=mapa %}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ds-divider"></div>
+
+  <!-- BOTÕES -->
+  <section class="ds-section" id="sec-botoes">
+    <div class="ds-section-header">
+      <div class="ds-section-label">Interações</div>
+      <h2 class="ds-section-title">Botões</h2>
+      <p class="ds-section-desc">Hierarquia visual clara: primário, secundário, ghost e perigo.</p>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="glass-card">
+        <div class="glass-card-title">Variantes</div>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;">
+          <button class="polis-btn polis-btn-primario">Primário</button>
+          <button class="polis-btn polis-btn-secundario">Secundário</button>
+          <button class="polis-btn polis-btn-ghost">Ghost</button>
+          <button class="polis-btn polis-btn-perigo">Perigo</button>
+        </div>
+      </div>
+      <div class="glass-card">
+        <div class="glass-card-title">Tamanhos & Ícones</div>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;">
+          <button class="polis-btn polis-btn-primario polis-btn-sm">Pequeno</button>
+          <button class="polis-btn polis-btn-primario">Padrão</button>
+          <button class="polis-btn polis-btn-primario polis-btn-lg">Grande</button>
+          <button class="polis-btn-icone">✏️</button>
+          <button class="polis-btn-icone">👁️</button>
+          <button class="polis-btn-icone">🗑️</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ds-divider"></div>
+
+  <!-- FORMULÁRIOS -->
+  <section class="ds-section" id="sec-forms">
+    <div class="ds-section-header">
+      <div class="ds-section-label">Entrada de Dados</div>
+      <h2 class="ds-section-title">Formulários</h2>
+      <p class="ds-section-desc">Campos de texto, selects e validação com feedback visual.</p>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="glass-card">
+        <div class="glass-card-title">Campos</div>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div class="polis-form-grupo">
+            <label class="polis-form-label polis-form-label-obr">Nome completo</label>
+            <input class="polis-form-input" type="text" placeholder="Digite o nome completo">
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div class="polis-form-grupo">
+              <label class="polis-form-label polis-form-label-obr">CPF</label>
+              <input class="polis-form-input" type="text" placeholder="000.000.000-00">
+            </div>
+            <div class="polis-form-grupo">
+              <label class="polis-form-label">Data de nascimento</label>
+              <input class="polis-form-input" type="date">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="glass-card">
+        <div class="glass-card-title">Validação</div>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div class="polis-form-grupo">
+            <label class="polis-form-label">Campo com erro</label>
+            <input class="polis-form-input erro" type="text" value="CPF inválido">
+            <span class="polis-form-erro-msg">CPF inválido. Verifique o número digitado.</span>
+          </div>
+          <div class="polis-form-grupo">
+            <label class="polis-form-label">Observações</label>
+            <textarea class="polis-form-textarea" placeholder="Digite aqui..."></textarea>
+            <span class="polis-form-hint">Máximo 500 caracteres.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ds-divider"></div>
+
+  <!-- ALERTAS E TOASTS -->
+  <section class="ds-section" id="sec-alertas">
+    <div class="ds-section-header">
+      <div class="ds-section-label">Feedback</div>
+      <h2 class="ds-section-title">Alertas & Toasts</h2>
+      <p class="ds-section-desc">Comunicação contextual com o usuário — inline e em notificações flutuantes.</p>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="glass-card">
+        <div class="glass-card-title">Alertas Inline</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="polis-alert polis-alert-sucesso">✅ Funcionário salvo com sucesso.</div>
+          <div class="polis-alert polis-alert-erro">❌ Não foi possível salvar os dados.</div>
+          <div class="polis-alert polis-alert-aviso">⚠️ Contrato vence em 7 dias.</div>
+          <div class="polis-alert polis-alert-info">ℹ️ Processamento em andamento.</div>
+        </div>
+      </div>
+      <div class="glass-card">
+        <div class="glass-card-title">Toasts</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="polis-toast polis-toast-sucesso"><span>✅</span><span>Registro salvo com sucesso.</span></div>
+          <div class="polis-toast polis-toast-erro"><span>❌</span><span>Erro ao processar. Tente novamente.</span></div>
+          <div class="polis-toast polis-toast-aviso"><span>⚠️</span><span>Reenvio agendado para o e-Social.</span></div>
+          <div class="polis-toast polis-toast-info"><span>ℹ️</span><span>Folha em processamento.</span></div>
+        </div>
+        <div style="margin-top:12px;"><span class="code-token">polisToasts.exibir("msg", "sucesso")</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ds-divider"></div>
+
+  <!-- MODAL -->
+  <section class="ds-section" id="sec-modal">
+    <div class="ds-section-header">
+      <div class="ds-section-label">Diálogos</div>
+      <h2 class="ds-section-title">Modal</h2>
+      <p class="ds-section-desc">Janela de confirmação e ações destrutivas.</p>
+    </div>
+
+    <div class="glass-card" style="max-width:640px;">
+      <div style="position:relative;height:260px;background:rgba(15,21,35,0.45);border-radius:14px;display:flex;align-items:center;justify-content:center;">
+        <div class="polis-modal">
+          <div class="polis-modal-header">
+            <span class="polis-modal-titulo">Confirmar Demissão</span>
+            <button class="polis-btn-icone" style="width:28px;height:28px;border:none;font-size:12px;">✕</button>
+          </div>
+          <div class="polis-modal-corpo">
+            <p style="font-size:var(--fonte-tamanho-sm);color:var(--cor-texto-suave);line-height:1.6;">Deseja realmente demitir <strong>Ana Paula Ferreira</strong>? Esta ação não pode ser desfeita.</p>
+          </div>
+          <div class="polis-modal-rodape">
+            <button class="polis-btn polis-btn-ghost polis-btn-sm">Cancelar</button>
+            <button class="polis-btn polis-btn-perigo polis-btn-sm">Confirmar Demissão</button>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:12px;"><span class="code-token">polisModals.abrir('id-do-modal')</span></div>
+    </div>
+  </section>
+
+  <div class="ds-divider"></div>
+
+  <!-- TIPOGRAFIA -->
+  <section class="ds-section" id="sec-tipo">
+    <div class="ds-section-header">
+      <div class="ds-section-label">Fundamentos</div>
+      <h2 class="ds-section-title">Tipografia — Inter</h2>
+      <p class="ds-section-desc">Escala tipográfica consistente com a fonte Inter.</p>
+    </div>
+
+    <div class="glass-card">
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+          <span style="font-size:28px;font-weight:700;color:var(--ds-text);">Título H1</span>
+          <span class="code-token">--fonte-tamanho-2xl / bold</span>
+        </div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+          <span style="font-size:22px;font-weight:600;color:var(--ds-text);">Título H2</span>
+          <span class="code-token">--fonte-tamanho-xl / semi</span>
+        </div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+          <span style="font-size:18px;font-weight:600;color:var(--ds-text);">Título H3</span>
+          <span class="code-token">--fonte-tamanho-lg / semi</span>
+        </div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+          <span style="font-size:14px;color:var(--ds-text);">Texto base</span>
+          <span class="code-token">--fonte-tamanho-base</span>
+        </div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+          <span style="font-size:13px;color:var(--ds-text-muted);">Texto suave</span>
+          <span class="code-token">--fonte-tamanho-sm / cor-texto-suave</span>
+        </div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+          <span style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--ds-text-dim);">RÓTULO / LABEL</span>
+          <span class="code-token">--fonte-tamanho-xs / semi / upper</span>
+        </div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+          <span style="font-family:var(--fonte-mono);font-size:13px;color:var(--ds-text);">RH-0241 / 123.456.789-00</span>
+          <span class="code-token">--fonte-mono (matrículas, CPF)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ds-divider"></div>
+
+  <!-- VARIÁVEIS CSS -->
+  <section class="ds-section" id="sec-vars">
+    <div class="ds-section-header">
+      <div class="ds-section-label">Referência Rápida</div>
+      <h2 class="ds-section-title">Variáveis CSS</h2>
+      <p class="ds-section-desc">Nunca valor fixo em CSS de sub-app. Sempre <span class="code-token">var(--nome)</span>.</p>
+    </div>
+
+    <div class="gallery-grid-3">
+      <div class="glass-card">
+        <div class="glass-card-title">Cores</div>
+        <div style="font-size:12px;font-family:var(--fonte-mono);display:flex;flex-direction:column;gap:6px;color:var(--ds-text-muted);">
+          <span>--cor-entidade</span>
+          <span>--cor-entidade-dark</span>
+          <span>--cor-entidade-light</span>
+          <span>--cor-entidade-muted</span>
+          <span style="margin-top:4px;">--cor-sucesso / -light / -muted</span>
+          <span>--cor-erro / -light / -muted</span>
+          <span>--cor-aviso / -light / -muted</span>
+          <span>--cor-info / -light / -muted</span>
+          <span style="margin-top:4px;">--cor-fundo / --cor-fundo-card</span>
+          <span>--cor-borda / --cor-borda-forte</span>
+          <span>--cor-texto / -suave / -fraco</span>
+        </div>
+      </div>
+      <div class="glass-card">
+        <div class="glass-card-title">Espaçamento & Forma</div>
+        <div style="font-size:12px;font-family:var(--fonte-mono);display:flex;flex-direction:column;gap:6px;color:var(--ds-text-muted);">
+          <span>--espacamento-xs <span style="color:var(--ds-text-dim);">(4px)</span></span>
+          <span>--espacamento-sm <span style="color:var(--ds-text-dim);">(8px)</span></span>
+          <span>--espacamento-base <span style="color:var(--ds-text-dim);">(16px)</span></span>
+          <span>--espacamento-lg <span style="color:var(--ds-text-dim);">(24px)</span></span>
+          <span>--espacamento-xl <span style="color:var(--ds-text-dim);">(32px)</span></span>
+          <span>--espacamento-2xl <span style="color:var(--ds-text-dim);">(48px)</span></span>
+          <span style="margin-top:4px;">--borda-raio-sm <span style="color:var(--ds-text-dim);">(6px)</span></span>
+          <span>--borda-raio <span style="color:var(--ds-text-dim);">(10px)</span></span>
+          <span>--borda-raio-lg <span style="color:var(--ds-text-dim);">(14px)</span></span>
+          <span>--borda-raio-xl <span style="color:var(--ds-text-dim);">(20px)</span></span>
+          <span>--borda-raio-pill <span style="color:var(--ds-text-dim);">(999px)</span></span>
+        </div>
+      </div>
+      <div class="glass-card">
+        <div class="glass-card-title">Tipografia & Efeitos</div>
+        <div style="font-size:12px;font-family:var(--fonte-mono);display:flex;flex-direction:column;gap:6px;color:var(--ds-text-muted);">
+          <span>--fonte-principal</span>
+          <span>--fonte-mono</span>
+          <span style="margin-top:4px;">--fonte-tamanho-xs <span style="color:var(--ds-text-dim);">(11px)</span></span>
+          <span>--fonte-tamanho-sm <span style="color:var(--ds-text-dim);">(13px)</span></span>
+          <span>--fonte-tamanho-base <span style="color:var(--ds-text-dim);">(14px)</span></span>
+          <span>--fonte-tamanho-md <span style="color:var(--ds-text-dim);">(15px)</span></span>
+          <span>--fonte-tamanho-lg <span style="color:var(--ds-text-dim);">(18px)</span></span>
+          <span>--fonte-tamanho-xl <span style="color:var(--ds-text-dim);">(22px)</span></span>
+          <span>--fonte-tamanho-2xl <span style="color:var(--ds-text-dim);">(28px)</span></span>
+          <span style="margin-top:4px;">--sombra-xs/sm/card/hover/modal</span>
+          <span>--transicao-padrao <span style="color:var(--ds-text-dim);">(150ms)</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <div class="ds-divider"></div>
+
+  <footer class="ds-footer">
+    <div class="ds-footer-logo">PÓLIS</div>
+    <p class="ds-footer-text">Ecossistema de Gestão Municipal — Bal. Rincão/SC</p>
+    <p class="ds-footer-text" style="margin-top:4px;">Design System v2.0 · 2027</p>
+    <div class="ds-footer-links">
+      <a href="https://github.com/Marlon-Zywski/Plataforma-Polis" class="ds-footer-link" target="_blank">GitHub</a>
+      <a href="#hero" class="ds-footer-link">Voltar ao topo</a>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT
+       ============================================================ -->
+  <script>
+    // Entidades — mapa de cores e labels
+    const entidades = {
+      prefeitura: { cor: '#2563EB', dark: '#1D4ED8', light: '#EFF6FF', muted: '#BFDBFE', label: 'Prefeitura' },
+      saude: { cor: '#0D9488', dark: '#0F766E', light: '#F0FDFA', muted: '#99F6E4', label: 'Saúde' },
+      educacao: { cor: '#D97706', dark: '#B45309', light: '#FFFBEB', muted: '#FDE68A', label: 'Educação' },
+      assistencia: { cor: '#7C3AED', dark: '#6D28D9', light: '#F5F3FF', muted: '#DDD6FE', label: 'Assist. Social' },
+      samae: { cor: '#0891B2', dark: '#0E7490', light: '#ECFEFF', muted: '#A5F3FC', label: 'SAMAE' },
+    };
+
+    function trocarEntidade(btn, slug) {
+      const e = entidades[slug];
+      if (!e) return;
+
+      // Atualizar pills externas
+      document.querySelectorAll('.entity-pill').forEach(p => p.classList.remove('ativa'));
+      document.querySelectorAll(`.entity-pill`).forEach(p => {
+        if (p.textContent.trim().includes(e.label.split('.')[0])) p.classList.add('ativa');
+      });
+
+      // Atualizar botões internos da sidebar
+      document.querySelectorAll('.polis-entidade-btn').forEach(b => b.classList.remove('ativa'));
+      document.querySelectorAll(`.polis-entidade-btn[data-entidade="${slug}"]`).forEach(b => b.classList.add('ativa'));
+
+      // Marcar a pill clicada se for uma pill
+      if (btn.classList.contains('entity-pill')) btn.classList.add('ativa');
+      if (btn.classList.contains('polis-entidade-btn')) btn.classList.add('ativa');
+
+      const body = document.getElementById('body');
+
+      // Troca classe no body
+      Object.keys(entidades).forEach(k => body.classList.remove('entidade-' + k));
+      body.classList.add('entidade-' + slug);
+
+      // Aplica variáveis CSS dinamicamente
+      const root = document.documentElement;
+      root.style.setProperty('--cor-entidade', e.cor);
+      root.style.setProperty('--cor-entidade-dark', e.dark);
+      root.style.setProperty('--cor-entidade-light', e.light);
+      root.style.setProperty('--cor-entidade-muted', e.muted);
+
+      // Atualiza elementos da demo
+      document.querySelectorAll('.polis-sidebar-logo-icon, .polis-avatar').forEach(el => {
+        el.style.background = e.cor;
+      });
+
+      // Atualiza nome da entidade nos breadcrumbs e titlebar
+      const nomeEl = document.getElementById('demo-entidade-nome');
+      if (nomeEl) nomeEl.textContent = e.label;
+      const breadEl = document.getElementById('demo-breadcrumb-entidade');
+      if (breadEl) breadEl.textContent = e.label;
+
+      // Atualiza hero glow
+      const glow = document.getElementById('hero-glow');
+      if (glow) glow.style.background = e.cor;
+    }
+
+    // Accordion da sidebar
+    function toggleAccordion(item) {
+      const body = item.nextElementSibling;
+      if (!body) return;
+      const aberto = item.classList.contains('aberto');
+      item.classList.toggle('aberto', !aberto);
+      body.style.display = aberto ? 'none' : 'block';
+    }
+
+    // Intersection Observer for scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -60px 0px'
+    });
+
+    document.querySelectorAll('.ds-section').forEach(el => observer.observe(el));
+
+    // Animate hero on load
+    window.addEventListener('DOMContentLoaded', () => {
+      const heroContent = document.querySelector('.hero-content');
+      if (heroContent) {
+        heroContent.style.opacity = '0';
+        heroContent.style.transform = 'translateY(24px)';
+        heroContent.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            heroContent.style.opacity = '1';
+            heroContent.style.transform = 'translateY(0)';
+          });
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>

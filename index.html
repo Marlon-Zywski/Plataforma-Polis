@@ -202,10 +202,82 @@
       overflow-x: hidden;
     }
 
+    /* Selection apenas fora da demo */
     ::selection {
       background: var(--cor-entidade);
       color: #fff;
     }
+
+    /* ISOLAMENTO DA DEMO — reseta todas as cores do dark mode
+       para o tema claro do design system real */
+    .demo-light-zone {
+      color: var(--cor-texto) !important;
+      font-size: var(--fonte-tamanho-base);
+    }
+    .demo-light-zone * {
+      color: inherit;
+    }
+    /* Sobrescrever seleção dentro da demo */
+    .demo-light-zone ::selection {
+      background: var(--cor-entidade-muted);
+      color: var(--cor-texto);
+    }
+    /* Textos específicos da demo com cores explícitas */
+    .demo-light-zone .polis-tabela td { color: var(--cor-texto); }
+    .demo-light-zone .polis-tabela th { color: var(--cor-texto-suave); }
+    .demo-light-zone .polis-card-kpi-label { color: var(--cor-texto-suave); }
+    .demo-light-zone .polis-card-kpi-valor { color: var(--cor-texto); }
+    .demo-light-zone .polis-card-kpi-var { color: var(--cor-sucesso); }
+    .demo-light-zone .polis-tabela-titulo { color: var(--cor-texto); }
+    .demo-light-zone .polis-tabela-total { color: var(--cor-texto-suave); }
+    .demo-light-zone .polis-breadcrumb-item { color: var(--cor-texto-suave); }
+    .demo-light-zone .polis-breadcrumb-item.ativo { color: var(--cor-texto); }
+    .demo-light-zone .polis-paginacao-info { color: var(--cor-texto-suave); }
+    .demo-light-zone .polis-paginacao-btn { color: var(--cor-texto-suave); }
+    .demo-light-zone .polis-paginacao-btn.ativo { color: #fff; }
+    .demo-light-zone .polis-card-kpi { color: var(--cor-texto); }
+    /* Sidebar mantém seu próprio esquema dark */
+    .demo-light-zone .polis-sidebar,
+    .demo-light-zone .polis-sidebar * { color: inherit; }
+
+    /* ============================================================
+       CORREÇÃO DE COMPONENTES NA GALERIA
+       Formulários, Badges, Alerts, Toasts e Modal
+       têm fundo claro mas herdam cor branca do body dark
+       ============================================================ */
+
+    /* Badges — cor explícita por variante */
+    .polis-badge-ativo { background: var(--cor-sucesso-light) !important; color: var(--cor-sucesso) !important; }
+    .polis-badge-inativo { background: var(--cinza-100) !important; color: var(--cinza-500) !important; }
+    .polis-badge-pendente { background: var(--cor-aviso-light) !important; color: var(--cor-aviso) !important; }
+    .polis-badge-erro { background: var(--cor-erro-light) !important; color: var(--cor-erro) !important; }
+    .polis-badge-info { background: var(--cor-info-light) !important; color: var(--cor-info) !important; }
+    .polis-badge-entidade { background: var(--cor-entidade-light) !important; color: var(--cor-entidade) !important; }
+
+    /* Form inputs — texto escuro explícito */
+    .polis-form-label { color: var(--cor-texto) !important; }
+    .polis-form-input,
+    .polis-form-select,
+    .polis-form-textarea {
+      color: var(--cor-texto) !important;
+      background: var(--cor-fundo-card) !important;
+    }
+    .polis-form-hint { color: var(--cor-texto-suave) !important; }
+    .polis-form-erro-msg { color: var(--cor-erro) !important; }
+
+    /* Alerts — forçar cores corretas */
+    .polis-alert-sucesso { color: #15803D !important; }
+    .polis-alert-erro { color: #B91C1C !important; }
+    .polis-alert-aviso { color: #92400E !important; }
+    .polis-alert-info { color: #0369A1 !important; }
+
+    /* Modal — texto escuro no fundo branco */
+    .polis-modal { color: var(--cor-texto) !important; }
+    .polis-modal-titulo { color: var(--cor-texto) !important; }
+    .polis-modal-corpo p { color: var(--cor-texto-suave) !important; }
+
+    /* Toasts — fundo dark já tem texto claro, OK */
+    .polis-toast { color: #fff !important; }
 
     /* Scrollbar global */
     ::-webkit-scrollbar { width: 6px; }
@@ -1346,9 +1418,9 @@
         <div style="width:50px;"></div>
       </div>
 
-      <div class="device-content">
+      <div class="device-content demo-light-zone">
         <!-- Sidebar -->
-        <div class="polis-sidebar" style="width:252px;">
+        <div class="polis-sidebar" style="width:252px;color:var(--sidebar-texto);">
           <div class="polis-entidade-switcher" style="padding-top:var(--espacamento-base);">
             <button class="polis-entidade-btn ativa" data-entidade="prefeitura" onclick="trocarEntidade(this,'prefeitura')">
               <span class="polis-entidade-dot" style="background:#2563EB;"></span>

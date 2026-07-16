@@ -23,7 +23,9 @@ Unifica **Saúde**, **Educação**, **Tributos** e **RH** em uma única base de 
 
 A Plataforma Pólis resolve o problema crônico de municípios brasileiros que operam com dezenas de sistemas desconectados, cada um com seu banco de dados, sua interface e seu fornecedor. O resultado é retrabalho, inconsistência de dados e dependência tecnológica.
 
-**Pólis muda isso.** Um ecossistema, uma base, uma interface.
+Diferente de "sistemas prontos" comerciais que obrigam a prefeitura a se adaptar aos seus processos rígidos (forçando o uso de fluxos predefinidos), a **Pólis é 100% full-modular e flexível**. Você ativa apenas os módulos que precisa e adapta a plataforma à realidade do município, e não o contrário.
+
+**Pólis muda as regras.** Um ecossistema, uma base, uma interface — totalmente moldável.
 
 ## 🏗️ Arquitetura
 
@@ -83,6 +85,7 @@ O Design System é a **fonte da verdade visual** de toda a plataforma. Cada enti
 ## 🔐 Princípios
 
 - **🏠 Independência total** — Sem dependência de fornecedores externos
+- **🧩 Full-Modular** — Arquitetura baseada em módulos independentes. Esqueça sistemas "engessados"; ative e componha apenas o que o município realmente precisa.
 - **🔒 Segurança by design** — Dados sensíveis ficam na infraestrutura do município
 - **🎨 Consistência visual** — Design System como fonte da verdade
 - **📊 Base unificada** — Um dado, um lugar, zero retrabalho
